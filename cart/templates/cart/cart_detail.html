@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load cart_tags %}
+
+{% block title %}{{titl}}{% endblock %}
+
+{% block background_images %}
+<div id='cart-detail' >
+
+  <div class="ps-hero bg--cover"  data-background="{% static "images/hero/product.jpg" %}">
+     <div class="ps-hero__content">
+      <h2 class='category_name' >{{titl}} </h2>
+      
+    </div> 
+  </div>
+  
+</div>
+{% endblock  %}
+
+{% block content %}
+
+{% user_carts request as carts %}
+
+<main class="ps-main " id='cart-detail2'  >
+  
+  {% include "cart/include/input.html" %}
+</main>
+
+{% include "includes/foter_cart_chek.html" %}
+
+
+
+{% endblock %}

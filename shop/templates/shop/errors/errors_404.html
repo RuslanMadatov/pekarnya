@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Ошибка 404
+{% endblock %}
+
+{% block content %}
+<div class="ps-404">
+  <div class="container">
+    <h1>404</h1>
+    <h3>Page not found</h3>
+    <p>Мы ищем вашу страницу... но не можем ее найти</p><a class="ps-btn ps-btn--yellow" href="{{request.META.HTTP_REFERER}}">Назад</a>
+    <div class="ps-404__image"><img src="{% static "images/404.jpg" %}" alt="404"></div>
+  </div>
+</div>
+{% include "includes/foter_cart_chek.html" %}
+{% endblock %}

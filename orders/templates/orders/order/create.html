@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load cart_tags %}
+{% load order_tags %}
+
+{% block title %}<title>{{titl}}</title>{% endblock %}
+
+{% block background_images %}
+<div id='cart-detail' >
+
+  <div class="ps-hero bg--cover"  data-background="{% static "images/hero/product.jpg" %}">
+     <div class="ps-hero__content">
+      <h2 class='category_name' >{{titl}} </h2>
+      
+    </div>
+     {% quantyty_product request %} 
+    {% include "includes/notifications.html" %} 
+  </div>
+  
+</div>
+{% endblock  %}
+
+{% block content %}
+
+<div class="ps-checkout pt-40 pb-40">
+  <div class="ps-container">
+    <form class="ps-form--checkout" action="{% url 'orders:order_create' %}" method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+          <div class="ps-checkout__billing">
+            <h3>Оформление заказа</h3>
+                <div class="form-group form-group--inline">
+                  <label for="id_first_name">Имя<span>*</span>
+                  </label>
+                  <div class="form-group__content">
+                    <input class="form-control" for="id_first_name" type="text" 
+                    value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+                    name="first_name"
+                    placeholder="Введите ваше имя" required autofocus>
+                    {% if form.first_name.errors %}
+                      <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="form-group form-group--inline">
+                  <label for='id_last_name'>Фамилия<span>*</span>
+                  </label>
+                  <div class="form-group__content">
+                    <input class="form-control" for='id_last_name' type="text"
+                    value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
+                    name='last_name'
+                    placeholder="Введите вашу фамилию" required autofocus>
+                    {% if form.last_name.errors %}
+                      <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="form-group form-group--inline">
+                  <label for='id_email'>Email <span>*</span>
+                  </label>
+                  <div class="form-group__content">
+                    <input class="form-control" for='id_email' type="email"
+                    value="{% if form.email.value %}{{ form.email.value }}{% endif %}"
+                    name='email'
+                    placeholder="Введите ваш email" required autofocus>
+                    {% if form.email.errors %}
+                      <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="form-group form-group--inline">
+                  <label for='id_address'>Адрес<span>*</span>
+                  </label>
+                  <div class="form-group__content">
+                    <input class="form-control" for='id_address' type="text"
+                    value="{% if form.address.value %}{{ form.address.value }}{% endif %}"
+                    name='address'
+                    placeholder="Нижегородская,5" required autofocus>
+                    {% if form.address.errors %}
+                      <div class="alert alert-danger alert-dismissible fade show">{{form.address.errors}}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="form-group form-group--inline">
+                  <label for='id_postal_code'>Индекс<span>*</span>
+                  </label>
+                  <div class="form-group__content">
+                    <input class="form-control" for='id_postal_code' type="text"
+                    value="{% if form.postal_code.value %}{{ form.postal_code.value }}{% endif %}"
+                    name='postal_code'
+                    placeholder="Введите Ваш почтовый индекс" required autofocus>
+                    {% if form.postal_code.errors %}
+                      <div class="alert alert-danger alert-dismissible fade show">{{form.postal_code.errors}}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                
+                <div class="form-group form-group--inline">
+                  <label for='id_city'>Город<span>*</span>
+                  </label>
+                  <div class="form-group__content">
+                    <input class="form-control" for='id_city' type="text"
+                    value="{% if form.city.value %}{{ form.city.value }}{% endif %}"
+                    name='city'
+                    placeholder="Введите Ваш город проживания" required autofocus>
+                  </div>
+                </div>
+               
+                
+            
+            <h3 class="mt-40"> Дополнительная информация</h3>
+            <div class="form-group form-group--inline">
+              <label for='id_text'>Примечания к заказу</label>
+              <div class="form-group__content">
+                <textarea class="form-control "  for='id_text' name='text' rows="3" ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+          <div class="ps-checkout__order">
+            <header>
+              <h3>Ваш Заказ</h3>
+            </header>
+            <div class="content">
+              {% user_carts request as carts %}
+              <table class="table ps-checkout__products">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase">Продукт</th>
+                    <th class="text-uppercase">Итого</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for cart in carts %}
+                    <tr>
+                      <td>{{ cart.product.name }} x{{ cart.quantity }}</td>
+                      <td>{{cart.products_price|floatformat:"2u"}}₽</td>
+                    </tr>
+                  {% endfor %}  
+                  
+                  <tr>
+                    <td>Итого по заказу</td>
+                    <td>{{ carts.total_price|floatformat:"2u" }}₽</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="ps-btn ps-btn--fullwidth ps-btn--yellow form_btn_1" type='submit'>ПЕРЕЙТИ К ОПЛАТЕ</button>
+            </div>
+           
+          </div>
+          
+        </div>
+      </div>
+      
+    </form>
+  </div>
+  {% include "includes/foter_cart_chek.html" %}
+{% endblock %}

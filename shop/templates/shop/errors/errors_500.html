@@ -1,0 +1,19 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+  Ошибка 500
+{% endblock %}
+<div class="ps-404">
+  <div class="container">
+    <h1>500</h1>
+    <h3>Page not found</h3>
+    <p>Внутренняя ошибка сервера</p><a class="ps-btn ps-btn--yellow" href="{% url 'shop:index' %}">Назад на главную</a>
+    <div class="ps-404__image"><img src="{% static "images/404.jpg" %}" alt="505"></div>
+  </div>
+</div>
+{% include "includes/foter_cart_chek.html" %}
+{% block content %}
+
+
+{% endblock %}

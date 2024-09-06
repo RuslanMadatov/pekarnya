@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{titl}}
+{% endblock %}
+
+{% block background_images %}
+  <div id='cart-detail' >
+
+    <div class="ps-hero bg--cover"  data-background="{% static "images/hero/contact.jpg" %}">
+      
+      <div class="ps-hero__content">
+        <h2 class='category_name' >{{titl}} </h2>
+        
+      </div>
+        
+      {% include "includes/notifications.html" %} 
+    </div>
+    
+  </div>
+{% endblock  %}
+
+{% block content %}
+<div class="ps-block--signature mb-5 mt-4">
+  <div class="ps-block__thumbnail"><img src="{% static "images/signature.png" %}" alt=""></div>
+  <div class="ps-container ">
+    <form class="ps-form--checkout mb-5" action="{% url 'orders:checking_orders' %}" method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+          <div class="ps-checkout__billing">
+            <h3>Проверка трекера</h3>
+                <div class="form-group form-group--inline">
+                  <label for="id_order_code">Введите номер<span>*</span></label>
+                  <div class="form-group__content">
+                    <input class="form-control" for="id_order_code" 
+                    type="text" 
+                    placeholder="Номер трекера указан в письме"
+                    name='order_code'
+                    value="{% if form.order_code.value %}{{ form.order_code.value }}{% endif %}"
+                    required>
+                    {% comment %} {% if form.first_name.errors %}
+                      <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                    {% endif %} {% endcomment %}
+                  </div>
+                </div>
+
+          </div>
+          <div class="form-group submit">
+            <button class="ps-btn form_btn_2 ps-btn--yellow">Отправить</button>
+          </div>
+        </div>
+        
+      </div>
+    </form>
+  </div>
+</div>
+<div class="ps-about-number mb-5">
+  <div class="ps-container">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 ">
+        <div class="ps-block--countdown"><i class="ba-biscuit-1"></i><span class="number ps-block__number" data-from="0" data-to="165"> 165</span>
+          <h4>Пекарей и Шеф-поваров</h4>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 ">
+        <div class="ps-block--countdown"><i class="ba-mixer"></i><span class="number ps-block__number" data-from="0" data-to="2130"> 2130</span>
+          <h4>Заказов</h4>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 ">
+        <div class="ps-block--countdown"><i class="ba-bread-2"></i><span class="number ps-block__number" data-from="0" data-to="3450"> 3450</span>
+          <h4>Печем в день продуктов</h4>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 ">
+        <div class="ps-block--countdown"><i class="ba-flour"></i><span class="number ps-block__number" data-from="0" data-to="345"> 345</span>
+          <h4>Килограммы муки</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}

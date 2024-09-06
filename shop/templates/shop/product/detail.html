@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block content %}
+<div class="ps-hero bg--cover" data-background="{% static "images/hero/product.jpg" %}">
+  <div class="ps-hero__content">
+    <h2 class='category_name'> {{product.name}}</h2>
+   
+  </div>
+</div>
+
+<main class="ps-main">
+  <a href="{{request.META.HTTP_REFERER}}">
+    <button type="button" class="btn btn-light back_button ms-4 btn-lg">Назад</button>
+  </a>
+  <div class="ps-container">
+    
+    <div class="ps-product--detail">
+      <div class="row">
+        <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 ">
+          <div class="ps-product__thumbnail mt-0">
+            {% if  product.new %}
+              <span class="ps-badge"><img src="{% static "images/icons/badge-red.png" %}" alt=""><i>New</i></span>
+            {% endif %}
+            {% if  product.discount %}
+                <span class="ps-badge ps-badge--sale"><img src="{% static "images/icons/badge-brown.png" %}" alt=""><i>{{ product.discount|floatformat:"1u"}}%</i></span>
+            {% endif %}
+            <div class="ps-product__image">
+              <div class="item"><a href="{{ product.image.url }}"><img src="{{ product.image.url }}" alt="{{ product.name }}"></a></div>
+              
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 ">
+          <div class="ps-product__info">
+            <h1 class="text-uppercase">{{ product.name }}</h1>
+            
+            {% if product.discount %}
+                <h3 class="ps-product__price"><del> {{product.price|floatformat:"2u"}} <span>₽</span></del> {{product.sell_price|floatformat:"2u"}} <span>₽</span></h3>
+            {% else %}
+              <h3 class="ps-product__price"> {{product.sell_price|floatformat:"2u"}} <span>₽</span></h3>
+            {% endif %}
+            <div class="ps-product__desc">
+              <h5>О продукте</h5>
+              <p>{{product.description}}</p>
+            </div>
+            
+            
+            <div >
+              <a href="{% url 'cart:cart_add' %}" class='add-to-cart'  data-product-id="{{ product.id }}" >
+                {% csrf_token %}
+                <button  class="ps-btn ps-btn--sm form_btn_1 mt-10">В корзину</button>
+              </a>  
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+</main>
+{% endblock %}

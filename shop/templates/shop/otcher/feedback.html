@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  {{titl}}
+{% endblock %}
+
+{% block background_images %}
+  <div id='cart-detail' >
+
+    <div class="ps-hero bg--cover"  data-background="{% static "images/hero/contact.jpg" %}">
+      <div class="ps-hero__content">
+        <h2 class='category_name' >{{titl}} </h2>
+        
+      </div>
+        
+      {% include "includes/notifications.html" %} 
+    </div>
+    
+  </div>
+{% endblock  %}
+
+{% block content %}
+
+<main class="ps-main">
+  <div class="ps-container">
+    
+    <form class="ps-form--menu ps-form--order-form" action="{% url 'shop:feedback' %}" method="post">
+      {% csrf_token %}
+      <div class="ps-section__header text-center">
+        <h3 class="ps-section__title">Контактная форма</h3>
+        <p>Делать людей счастливыми</p><span><img src="{% static "images/icons/floral.png" %}" alt=""></span>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="form-group">
+            <label for="id_subject">Тема письма<sup>*</sup></label>
+            {% comment %} <input class="form-control" for="id_subject" name='subject' type="text"  placeholder=""> {% endcomment %}
+            <select class="form-control" name="subject" id="id_subject" required>
+              <option value="Отзыв" selected>Отзыв</option>
+              <option value="Претензия">Претензия</option>
+            </select> 
+          </div>
+        </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+          <div class="form-group">
+            <label for="id_first_name">Ваше имя <sup>*</sup></label>
+            <input class="form-control" for="id_first_name" name='first_name' type="text"
+            value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" 
+            placeholder="Введите ваше имя"
+            required>
+            {% if form.first_name.errors %}
+              <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+          <div class="form-group">
+            <label for="id_phone_number">Ваш номер телефона<sup>*</sup></label>
+            <input class="form-control"  for="id_phone_number" type="text" name='phone_number'
+            value="{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}"  
+            placeholder="89166291895"
+            required>
+            {% if form.phone_number.errors %}
+                <div class="alert alert-danger alert-dismissible fade show">{{form.phone_number.errors}}</div>
+            {% endif %}
+          </div>
+        </div>
+        
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+          <div class="form-group">
+            <label for='id_email'>Ваш Email <sup>*</sup></label>
+            <input class="form-control"  for='id_email' type="email" name='email' 
+            value="{% if form.email.value %}{{ form.email.value }}{% endif %}"
+            placeholder="Ваш email">
+            {% if form.email.errors %}
+              <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+          <div class="form-group">
+            <label >Введите полученное значение <sup>*</sup></label>
+              <p class="form-control">{{ form.captcha }}</p>
+              {% comment %} <input type="text" class="form-control" name="captcha_1" required="" id="id_captcha_1" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"> {% endcomment %}
+            {% if form.captcha.errors %}
+              <div class="alert alert-danger alert-dismissible fade show">{{form.captcha.errors}}</div>
+            {% endif %}
+          </div>
+        </div>
+        
+        
+        
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+          <label for='id_content'>Примечания к заказу</label>
+          <div class="form-group__content">
+            <textarea class="form-control"  for='id_content' name='content' rows="3" ></textarea>
+          </div>
+        </div>
+        
+          <div class="form-group submit">
+            <button class="ps-btn form_btn_2 ps-btn--yellow">Отправить</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>
+{% include "includes/foter_cart_chek.html" %}
+    
+{% endblock %}

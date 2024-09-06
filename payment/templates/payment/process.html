@@ -1,0 +1,72 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Оплата заказ{% endblock %}
+
+{% block content %}
+
+<main>
+    <div class="container  mt-5">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2>Оформление заказа</h2>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-borderless text-center">
+                    <thead>
+                    <tr class="td_color align-middle">
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col" class="fs-5">Цена за товар</th>
+                        <th scope="col" class="fs-5">Колличество</th>
+                        <th scope="col" class="fs-5">Цена</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.items.all %}
+                        <tr class="align-middle">
+                            <td>
+                                <img src="{{ item.product.image.url }}" class="rounded w-75 mx-auto"
+                                     alt="{{ item.product.name }}">
+                            </td>
+                            <td class="px-3 fs-4">{{ item.product.name }}</td>
+                            <td class="px-3 fs-5">{{ item.price }}₽</td>
+                            <td class="px-3 fs-5">{{ item.quantity }}</td>
+                            <td class="px-3 fs-5">{{ item.get_cost }}₽</td>
+                        </tr>
+                        {% endfor %}
+                        <div class="row  mt-4">
+                            <div class="col-12">
+                                <tr class="text-center border_total align-middle">
+                                    <td class="fs-4 total">Итого</td>
+                                    <td colspan="3"></td>
+                                    <td class="fs-4 total">{{ order.get_total_cost }}₽</td>
+                                </tr>
+                            </div>
+                        </div>
+                    </tbody>
+                </table>
+                <div class="container mt-1">
+                    <div class="row ">
+                        <form action="{% url 'payment:process' %}" method="POST">
+                            <div class="col-12 text-end">
+                                <button class="btn btn-danger btn-lg">Оплатить заказ</button>
+                            </div>
+                        </form>
+                    </div>
+                    {% csrf_token %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}

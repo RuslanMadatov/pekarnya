@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+  {% block title %}
+    {{titl}}
+  {% endblock %}
+  
+{% block content %}
+<div class="ps-home-banner" id="slider">
+  <div class="ps-carousel--animate ps-carousel-nav">
+    <div class="item">
+      <div class="ps-banner--2">
+        <div class="ps-banner__content">
+          <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
+              <div class="ps-banner__container">
+                <h5 class="animated" data-animation-in="zoomIn" data-delay-in="0.1">КАЖДЫЙ ДЕНЬ МЫ ДЕЛАЕМ</h5>
+                <h3 class="animated" data-animation-in="zoomIn" data-delay-in="0.3">Свежеиспеченный хлеб</h3>
+                <p class="animated" data-animation-in="zoomIn" data-delay-in="0.4">Наша выпечка дарит радость</p>
+              </div>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 ">
+              <img src="{% static "images/banner/slider-1.png" %}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="ps-banner--2">
+        <div class="ps-banner__content">
+          <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
+              <div class="ps-banner__container">
+                <h5 class="animated" data-animation-in="zoomIn" data-delay-in="0.1">КАЖДЫЙ ДЕНЬ МЫ ДЕЛАЕМ</h5>
+                <h3 class="animated" data-animation-in="zoomIn" data-delay-in="0.3">Свежеиспеченный хлеб</h3>
+                <p class="animated" data-animation-in="zoomIn" data-delay-in="0.4">Наша выпечка дарит радость</p>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 "><img src="{% static "images/banner/slider-2.png" %}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ps-home-about--2">
+  <div class="ps-container">
+    <div class="ps-section__header text-center">
+      <h3 class="ps-section__title ">О нашей пекарни</h3>
+      <p>Любовь к муке</p><span><img src="{% static "images/icons/floral.png" %}" alt=""></span>
+    </div>
+    <div class="ps-section__content">
+      <ul class="tab-list" role="tablist">
+        <li class="active"><a href="#tab_01" aria-controls="tab_01" role="tab" data-toggle="tab">История</a></li>
+        <li><a href="#tab_02" aria-controls="tab_02" role="tab" data-toggle="tab">Наша команда</a></li>
+        <li><a href="#tab_03" aria-controls="tab_03" role="tab" data-toggle="tab">Награды</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_01" role="tabpanel">
+          <div class="ps-block--signature ps-block--signature">
+            <div class="ps-block__thumbnail"><img src="{% static "images/pages/home-3-intro.jpg" %}" alt=""></div>
+            <div class="ps-block__content">
+              <h3>Начиная с 2007</h3>
+              <p>Только натуральные продукты попадают в нашу выпечку по авторским рецептам. В нее мы владываем всю нашу любовь, чтобы на Ваших лицах появилась улыбка</p>
+              
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="tab_02" role="tabpanel">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+              <div class="ps-block--people">
+                <div class="ps-block__thumbnail"><img src="{% static "images/people/1.png" %}" alt=""></div>
+                <div class="ps-block__content">
+                  <div class="ps-block__header">
+                    <h3>Джуан Олсон</h3><span>Главный шеф-повар</span>
+                  </div>
+                  <p>"Моя команда поваров приходят в пять утра, чтобы уже через три часа наши гости были вкусили свежий ароматный круассан с бодрящим кофе"</p>
+                  <div class="ps-block__footer">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+              <div class="ps-block--people">
+                <div class="ps-block__thumbnail"><img src="{% static "images/people/2.png" %}" alt=""></div>
+                <div class="ps-block__content">
+                  <div class="ps-block__header">
+                    <h3>Гарольд Сантос</h3><span>Су-шеф повар</span>
+                  </div>
+                  <p>“Каждый раз в нашей работе мы следим, чтобы технология приготовления оставалась на высоком уровне и выпечка оставалась такой вкусной как и всегда"</p>
+                  <div class="ps-block__footer">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+              <div class="ps-block--people">
+                <div class="ps-block__thumbnail"><img src="{% static "images/people/3.png" %}" alt=""></div>
+                <div class="ps-block__content">
+                  <div class="ps-block__header">
+                    <h3>Джоэль Гэрмон</h3><span>Повар-кондитер</span>
+                  </div>
+                  <p>“Торты - это моя страсть, которой я всегда готов поделиться с Вами!”</p>
+                  <div class="ps-block__footer">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+              <div class="ps-block--people">
+                <div class="ps-block__thumbnail"><img src="{% static "images/people/4.png" %}" alt=""></div>
+                <div class="ps-block__content">
+                  <div class="ps-block__header">
+                    <h3>Рикардо Мэннинг</h3><span>Разработчик рецептов</span>
+                  </div>
+                  <p>“Мы никогда не останавливаемся на одном месте и не боимся эксперементировать с продуктами, чтобы вновь и вновь получали новые гастрономические удовольствия”</p>
+                  <div class="ps-block__footer">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Награды начало -->
+        <div class="tab-pane" id="tab_03" role="tabpanel">
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+              <div class="ps-block--award"><img src="{% static "images/icons/award-1.png" %}" alt="">
+                <h4> Пекарня года <span>2010 -2011</span></h4>
+                <p>Награда "Пекарня года" — высокое признание и неподдельное признание мастерства и таланта в искусстве выпечки хлебобулочных изделий. Это престижное звание, которое присуждается лучшим пекарям за их выдающиеся достижения в создании вкусных и качественных изделий, способных радовать и утолять самые изысканные вкусы.</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+              <div class="ps-block--award"><img src="{% static "images/icons/award-2.png" %}" alt="">
+                <h4> МАГАЗИН КЕКСОВ ГОДА <span>2012 - 2015</span></h4>
+                <p>Эта награда является свидетельством превосходства в индустрии выпечки и обозначает высочайший стандарт качества, инновации и творческого подхода к производству кексов.</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+              <div class="ps-block--award"><img src="{% static "images/icons/award-3.png" %}" alt="">
+                <h4> Пекарня месяца <span>2017 - 2018</span></h4>
+                <p>Это признание нашего мастерства, безупречного качества продуктов и преданности искусству хлебопечения.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials-->
+<div class="ps-testimonials bg--cover" data-background="{% static "images/bg/testimonials.jpg" %}">
+  <div class="ps-container">
+    <div class="ps-carousel--testimonial owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="0" data-owl-nav="false" data-owl-dots="true" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="off" data-owl-animate-in="fadeIn" data-owl-animate-out="fadeOut">
+      <div class="ps-block--tesimonial">
+        <div class="ps-block__user"><img src="{% static "images/user/1.jpg" %}" alt=""></div>
+        <div class="ps-block__content">
+          <select class="ps-rating">
+            <option value="1">1</option>
+            <option value="1">2</option>
+            <option value="1">3</option>
+            <option value="1">4</option>
+            <option value="2">5</option>
+          </select>
+          <p>“Торты в этой пекарни – это не просто сладкое удовольствие, они являются настоящим произведением искусства в мире кулинарии. Они объединяют в себе неповторимые вкусы, нежные текстуры и эстетическую привлекательность.”</p>
+        </div>
+        <div class="ps-block__footer">
+          <p><strong>Оксана Кузнецова</strong> </p>
+        </div>
+      </div>
+      <div class="ps-block--tesimonial">
+        <div class="ps-block__user"><img src="{% static "images/user/2.jpg" %}" alt=""></div>
+        <div class="ps-block__content">
+          <select class="ps-rating">
+            <option value="1">1</option>
+            <option value="1">2</option>
+            <option value="1">3</option>
+            <option value="1">4</option>
+            <option value="2">5</option>
+          </select>
+          <p>“Когда открываешь упаковку пряников, сразу ощущаешь их притягательный запах. Аромат спелых фруктов, пряных специй и свежей выпечки заполняет комнату, вызывая улыбку и желание попробовать каждый из них.”</p>
+        </div>
+        <div class="ps-block__footer">
+          <p><strong>Татьяна Иванова</strong> </p>
+        </div>
+      </div>
+      <div class="ps-block--tesimonial">
+        <div class="ps-block__user"><img src="{% static "images/user/3.jpg" %}" alt=""></div>
+        <div class="ps-block__content">
+          <select class="ps-rating">
+            <option value="1">1</option>
+            <option value="1">2</option>
+            <option value="1">3</option>
+            <option value="1">4</option>
+            <option value="2">5</option>
+          </select>
+          <p>“Если вы еще не пробовали пироги, обязательно попробуйте! Они точно покорят ваше сердце и желудок своим неповторимым вкусом и разнообразием.</p>
+        </div>
+        <div class="ps-block__footer">
+          <p><strong>Мария Шапошникова</strong> </p>
+        </div>
+      </div>
+      <div class="ps-block--tesimonial">
+        <div class="ps-block__user"><img src="{% static "images/user/4.jpg" %}" alt=""></div>
+        <div class="ps-block__content">
+          <select class="ps-rating">
+            <option value="1">1</option>
+            <option value="1">2</option>
+            <option value="1">3</option>
+            <option value="1">4</option>
+            <option value="2">5</option>
+          </select>
+          <p>“Круассаны ласкают вкусовые рецепторы своей  нежныой начинкой . Можно выбирать из такого разнообразия начинок, что голова идет кругом. Шоколад, ваниль, конфитюр, кремы различных вкусов - великолепие, которое открыто для каждого гурмана”</p>
+        </div>
+        <div class="ps-block__footer">
+          <p><strong>Даша Литвинова</strong> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% load static %}
+{% load cart_tags %}
+{% user_carts request as carts %}
+          
+<div class="ps-cart">
+
+  <a class="ps-cart__toggle" href="{% url 'cart:cart_detail'  %}"><span><i id="goods-in-cart-count" >{{ carts.total_quantity}}</i></span><i class="ba-shopping"></i></a>
+  
+  
+  {% if carts and not request.path == '/cart/' %}
+  <div class="ps-cart__listing" id='cart-items-container'>
+    <div class="ps-cart__content">
+      
+      {% for cart in carts %}
+      <div class="ps-cart-item">       
+        <a class="ps-cart-item__close remove-from-cart" data-cart-id='{{ cart.id }}' href="{% url 'cart:cart_remove' %}">{% csrf_token %}</a>
+        <div class="ps-cart-item__thumbnail">
+          <a href="product-detail.html"></a><img src="{{ cart.product.image.url }} " alt="{{ cart.product.name }}">
+        </div>
+        <div class="ps-cart-item__content">
+          <a class="ps-cart-item__title" href="{{ cart.product.get_absolute_url }}">{{ cart.product.name }}</a>
+          <p><span>Количество:<i>{{ cart.quantity }}</i></span><span>Всего:<i>{{ cart.products_price|floatformat:"2u" }}₽</i></span></p>
+        </div>
+      </div>
+      {% endfor %}
+      
+    </div>
+    
+    <div class="ps-cart__total">
+      <p>Общее количество:<span>{{carts.total_quantity}}</span></p>
+      <p>Итого:<span>{{ carts.total_price|floatformat:"2u" }}₽</span></p>
+    </div>
+    <div class="ps-cart__footer"><a href="{% url 'orders:order_create' %}">Оформить заказ</a></div>
+    
+  </div>
+  {% endif %}
+   
+ 
+</div>            
+          

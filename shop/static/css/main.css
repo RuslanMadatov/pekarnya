@@ -1,0 +1,148 @@
+@import url(fonts.css);
+
+/* мои стили */
+
+/* base html*/
+/* для иконок фуутера*/
+.footer_icons {
+  padding-left: 10px;
+}
+
+/* для активного меню */
+.menu_active {
+  color: #cd9b33;
+}
+
+.menu_color {
+   color: #333333;
+}
+
+/* .section_none {
+  visibility: hidden;
+} */
+
+/* shop-list.html */
+.category_name {
+  font-family: 'Sweet';
+}
+
+
+
+/* чтобы название продуктов в одну строку */
+.product_name {
+  white-space: nowrap;
+}
+
+/* форма для фильтрации в shop-list.html */
+.custom-checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.custom-checkbox+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+.custom-checkbox+label::before {
+  content: '';
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 0.25em;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+.custom-checkbox:checked+label::before {
+  border-color: #cd9b33;
+  background-color: #cd9b33;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.custom-checkbox:not(:disabled):not(:checked)+label:hover::before {
+  border-color: #cd9b33;
+}
+
+.filtr {
+  font-family: inherit;
+  color: #333;
+  font-weight: normal; 
+}
+
+ /* для элемента input c type="radio" */
+ .custom-radio {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+/* для элемента label связанного с .custom-radio */
+.custom-radio+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+/* создание в label псевдоэлемента  before со следующими стилями */
+.custom-radio+label::before {
+  content: '';
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+/* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
+.custom-radio:focus:not(:checked)+label::before {
+  border-color: #cd9b33;
+}
+.custom-radio:checked+label::before {
+  border-color: #cd9b33;
+  background-color: #cd9b33;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+/*  для изменения кнопок */
+.form_btn_1 {
+  padding: 9px 60px 7px;
+}
+
+.form_btn_2 {
+  text-align:start;
+  white-space: nowrap;
+  padding: 9px 36px 7px;
+  
+}
+
+/* detail кнопка 'назад' */
+.back_button, .back_button:hover {
+  font-family: 'Lora';
+  color:#cd9b33;
+}
+
+/* была проблема с footerom внизу пустота */
+.footer_extends {
+  min-height:100%;
+  margin: 0 0 -70px;
+}
+
+.tracker {
+  width: 30px;
+}
+
+.footer_cart_chek {
+  color: #0000FF;
+}
+
