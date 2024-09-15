@@ -124,26 +124,26 @@
           <div class="ps-pagination pb-25">
             {% if products %}
               <ul class="pagination">
-                {% if not products.has_previous %}
+                {% if not page_obj.has_previous %}
                   <li></li>
                 {% else %}
                   <li>
-                    <a href="{% if products.has_previous %}?{% change_params page=products.previous_page_number %}{% else %}#{% endif %}"><i class="fa fa-angle-left"></i></a>
+                    <a href="{% if page_obj.has_previous %}?{% change_params page=page_obj.previous_page_number %}{% else %}#{% endif %}"><i class="fa fa-angle-left"></i></a>
                   </li>
                 {% endif %}
-                {% for page in products.paginator.page_range %}
-                  {% if page >= products.number|add:-2 and page <= products.number|add:2 %}
-                    <li {% if products.number == page %} class="active" {% endif %}>
+                {% for page in page_obj.paginator.page_range %}
+                  {% if page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+                    <li {% if page_obj.number == page %} class="active" {% endif %}>
                       <a href="?{% change_params page=page %}">{{ page }}</a></li>
         
                   {% endif %}
                 {% endfor %}
                 
-                {% if not products.has_next %}
+                {% if not page_obj.has_next %}
                   <li></li>
                 {% else %}
                   <li >
-                    <a href="{% if products.has_next %}?{% change_params page=products.next_page_number %}{% else %}#{% endif %}"><i class="fa fa-angle-right"></i></a>
+                    <a href="{% if page_obj.has_next %}?{% change_params page=page_obj.next_page_number %}{% else %}#{% endif %}"><i class="fa fa-angle-right"></i></a>
                   </li>
                 {% endif %}
               </ul>

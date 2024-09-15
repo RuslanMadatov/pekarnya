@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-    'django_celery_beat',
+    # 'django_celery_beat',
     'robots',
     'phonenumber_field',
     'captcha',
@@ -204,17 +204,18 @@ EMAIL_USE_SSL = False
 #  настройка cellery
 # ри пароле редис "redis://:bb6fa8c8e6d200ed54f831ccc192bb0d50c9cd48627bf0a28dcf4e54f2d8caba@127.0.0.1:6379/1"
 # CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"  # or Redis instead of RabbitMQ
-CELERY_TASK_SERIALIZER = "json"
-CELERY_RESULT_SERIALIZER = "json"
-CELERY_ACCEPT_CONTENT = ["json"]
-CELERY_ENABLE_UTC = True
-# CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
-CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
-CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
-CELERY_TIMEZONE = 'Europe/Moscow'
+
+# CELERY_TASK_SERIALIZER = "json"
+# CELERY_RESULT_SERIALIZER = "json"
+# CELERY_ACCEPT_CONTENT = ["json"]
+# CELERY_ENABLE_UTC = True
+# # CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
+# CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+# CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
+# CELERY_TIMEZONE = 'Europe/Moscow'
 
 # для удаления старых сессий из бд django_celery_beat
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+# CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 # для кэширования
 # CACHES = {
