@@ -8,6 +8,8 @@ from django.views.generic import DetailView, ListView, TemplateView
 from django.shortcuts import redirect, render
 # from django.core.paginator import Paginator
 from django.contrib import messages
+from django.core.cache import cache
+
 
 
 from .models import Category, Product
@@ -15,7 +17,7 @@ from .models import Category, Product
 from .forms import FeedbackCreateForm
 from .utils import feedback_mail_admin
 # from .tasks import feedback_mail_admin
-# from django.views.decorators.cache import cache_page
+
 
 
 # начальная страницы при вызове сайта
@@ -41,27 +43,36 @@ class CategoryListView(ListView):
         new = self.request.GET.get('new', None)
         order_by = self.request.GET.get("order_by", None)
 
-        products = super().get_queryset().filter(category__slug=category_slug).filter(available=True, quantyty__gt=1)
+        products_list_view = cache.get('products_list_view')
+        if products_list_view is None:
+          products_list_view = super().get_queryset().filter(category__slug=category_slug).filter(available=True, quantyty__gt=1)
+          cache.set('product_list_view', products_list_view, 300)
         
         # для фильтров новые товары и со скидкой
         if discount and new:
-          products=products.filter(discount__gt=0.0).filter(new=True)
+          products_list_view=products_list_view.filter(discount__gt=0.0).filter(new=True)
         elif discount:
-          products=products.filter(discount__gt=0.0)       
+          products_list_view=products_list_view.filter(discount__gt=0.0)       
         elif new:
-          products = products.filter(new=True)
+          products_list_view = products_list_view.filter(new=True)
         
         # фильтр цена по возрастанию или убыванию
         if order_by:
-          products = products.order_by(order_by) 
-        return products
+          products_list_view = products_list_view.order_by(order_by) 
+        return products_list_view
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        category = Category.objects.all().get(slug=self.kwargs.get(self.slug_url_kwarg))
         
-        context['category'] = category
-        context['title'] = f"{category.name}"
+        category_list_view = cache.get('category_list_view')
+       
+        if category_list_view is None:
+          category_list_view = Category.objects.all().get(slug=self.kwargs.get(self.slug_url_kwarg))
+          cache.set('category_list_view', category_list_view, 300)
+        context['category'] = category_list_view
+        context['title'] = f"{category_list_view.name}"
+        # context['category'] = self.set_get_cache(query=category_list_view, cache_name='category_list_view', cache_time=10 )
+        # context['title'] = f"{self.set_get_cache(query=category_list_view, cache_name='category_list_view', cache_time=9 ).name}"
         return context 
 
 
@@ -72,8 +83,11 @@ class ProductDetailView(DetailView):
     context_object_name = 'product'
 
     def get_object(self, queryset  = None) -> Model:
-        product = Product.objects.get(slug=self.kwargs.get(self.slug_url_kwarg), available=True)
-        return product
+        product_detail_viev = cache.get('product_detail_viev')
+        if product_detail_viev is None:
+          product_detail_viev = Product.objects.get(slug=self.kwargs.get(self.slug_url_kwarg), available=True)
+          cache.set('product_detail_viev', product_detail_viev, 10)
+        return product_detail_viev
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

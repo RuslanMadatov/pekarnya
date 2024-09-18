@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     # 'django_celery_beat',
+    'debug_toolbar',
     'robots',
     'phonenumber_field',
     'captcha',
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -217,7 +219,13 @@ EMAIL_USE_SSL = False
 # для удаления старых сессий из бд django_celery_beat
 # CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
-# для кэширования
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": BASE_DIR / "cache_django",
+    }
+}
+# для кэширования redis
 # CACHES = {
 #     'default': {
 #         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
@@ -336,3 +344,8 @@ PHONENUMBER_DEFAULT_REGION = 'RU'
 # SECURE_SSL_REDIRECT = True
 # SECURE_SSL_REDIRECT = True
 # CSRF_COOKIE_SECURE = True
+
+# джанго тул бар
+INTERNAL_IPS = [
+'127.0.0.1',
+]
