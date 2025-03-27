@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.db import models
 from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
 
 from shop.models import Product
 
@@ -17,7 +18,7 @@ class CartQueryset(models.QuerySet):
     
 
 class Cart(models.Model):
-
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Пользователь')
     session_key = models.ForeignKey(to=Session, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Анонимный Пользователь')
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE, verbose_name='Товар')
     quantity = models.PositiveSmallIntegerField(default=0, verbose_name='Количество')
@@ -31,7 +32,7 @@ class Cart(models.Model):
     objects = CartQueryset().as_manager()
 
     def products_price(self):
-        return round(self.product.sell_price() * Decimal(self.quantity), 2)
+        return round(self.product.sell_price() * self.quantity, 2)
 
 
     

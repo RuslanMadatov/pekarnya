@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from shop.sitemap import ProductSitemaps, StaticSitemap
+from drf_spectacular.views import SpectacularRedocView, SpectacularSwaggerView, SpectacularAPIView
 # from django.conf.urls import handler404, handler500
 
 sitemaps = {
@@ -31,6 +32,13 @@ handler500 = 'shop.error.tr_handler500'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('api/v1/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('api/v1/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/v1/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/v1/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     re_path(r'^robots\.txt', include('robots.urls')),
     path('captcha/', include('captcha.urls')),
@@ -38,6 +46,7 @@ urlpatterns = [
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('payment/', include('payment.urls', namespace='payment')),
+    path('api/v1/', include('api.urls', namespace='api')),
     path('', include('shop.urls', namespace='shop')),
 ]
 

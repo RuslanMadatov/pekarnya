@@ -1,11 +1,11 @@
 from django import forms
-from .models import Order, TextArea, PostCode
+from .models import Order, PostCode
 
 
 class OrderCreateForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['first_name', 'last_name', 'email', 'address', 'postal_code', 'city']
+        fields = ['first_name', 'last_name', 'email', 'address', 'postal_code', 'city', 'text']
         # widgets = {'first_name': forms.TextInput(attrs={'placeholder': 'Иван', 'aria-label': 'Иван'}),
         #            'last_name': forms.TextInput(attrs={'placeholder': 'Иванов', 'aria-label': 'Иванов'}),
         #            'address': forms.TextInput(
@@ -18,13 +18,8 @@ class OrderCreateForm(forms.ModelForm):
     address=forms.CharField()
     postal_code=forms.CharField()
     city=forms.CharField()
-
-class TextAreaCraeteForm(forms.ModelForm):
-    class Meta:
-        model= TextArea
-        fields = ['text']
-    
     text = forms.CharField()
+
 
 class PostCodeCreateForm(forms.ModelForm):
     class Meta:

@@ -47,12 +47,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+    # main
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'payment.apps.PaymentConfig',
-    'django.contrib.sites',
-    'django.contrib.sitemaps',
+    'api.apps.ApiConfig',
+    
+    # библиотеки
+    'rest_framework',
+    'rest_framework.authtoken',
+    'django_filters', 
+    'drf_spectacular',
+    
+    'allauth', 
+    'allauth.account', 
+    'allauth.socialaccount',
+    'dj_rest_auth', 
+    'dj_rest_auth.registration', 
     # 'django_celery_beat',
     'debug_toolbar',
     'robots',
@@ -65,6 +79,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -190,7 +205,8 @@ YOCASSA_SECRET_KEY = os.getenv("YOKASSA_TOKEN")
 # настройка почтового клиента
 # отправляет письма на почтовый сервер по протоколу SMTP. Может использоваться как при разработке
 # сайта, так и при его эксплуатации
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # настрока почтового клиента для mail.ru
 EMAIL_HOST = 'smtp.mail.ru'
@@ -349,3 +365,32 @@ PHONENUMBER_DEFAULT_REGION = 'RU'
 INTERNAL_IPS = [
 '127.0.0.1',
 ]
+
+# Настройка Django REST Framework для использования django_filters
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+        
+    ),
+
+    'DEFAULT_PERMISSION_CLASSES': (
+      'rest_framework.permissions.IsAuthenticated',
+    ),
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+      'rest_framework.authentication.SessionAuthentication',
+      'rest_framework.authentication.TokenAuthentication',
+    ),
+#  для drf-spectacular
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    
+}
+
+# для drf-spectacular
+SPECTACULAR_SETTINGS = {
+    'TITLE': ' Pekarnya API',
+    'DESCRIPTION': 'API ддя сайта',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    
+}

@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from .models import Order, OrderItem, TextArea, PostCode
+from .models import Order, OrderItem, PostCode
 
 
 # экспорт в csv
@@ -46,9 +46,6 @@ class OrderItemInline(admin.TabularInline):
     model = OrderItem
     raw_id_fields = ['product']
 
-class TextAreaInline(admin.TabularInline):
-    model = TextArea
-    fields = ['text']
 
 class PostCodeInline(admin.TabularInline):
     model = PostCode
@@ -58,9 +55,9 @@ class PostCodeInline(admin.TabularInline):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'session_key', 'first_name', 'last_name', 'email', 'address', 'postal_code',
-                    'city', 'paid',
+                    'city', 'text','paid',
                     'created',
                     'updated', 'y_cassa_id']
     list_filter = ['paid', 'created', 'updated']
-    inlines = [TextAreaInline, OrderItemInline, PostCodeInline]
+    inlines = [ OrderItemInline, PostCodeInline]
     actions = [export_to_csv]
